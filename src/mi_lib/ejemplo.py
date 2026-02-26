@@ -114,7 +114,7 @@ while fallos < 5 and len(letras_restantes) > 0:
 
     letra = input("\nIntroduce una letra: ").lower()
 
-    # SOLO comprobar que sea 1 carácter
+   
     while len(letra) != 1:
         letra = input("Introduce solo UN carácter: ").lower()
 
