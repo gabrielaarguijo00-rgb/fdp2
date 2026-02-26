@@ -88,3 +88,55 @@ def numero_a_palabras(n):
 numero = int(input("Introduce un número entre 0 y 999: "))
 resultado = numero_a_palabras(numero)
 print("En palabras:", resultado)
+
+palabra = input("Introduce la palabra: ").strip().lower()
+
+while palabra == "":
+    palabra = input("La palabra no puede estar vacía. Introduce la palabra: ").strip().lower()
+
+lista_palabra = list(palabra)
+letras_restantes = list(palabra)
+
+fallos = 0
+letras_acertadas = []
+letras_intentadas = []
+
+mensajes = {
+    "acierto": "Acierto",
+    "fallo": "Fallo",
+    "ganar": "Ganaste",
+    "perder": "Perdiste"
+}
+
+print("\nPalabra:", "*" * len(palabra))
+
+while fallos < 5 and len(letras_restantes) > 0:
+
+    letra = input("\nIntroduce una letra: ").lower()
+
+    # SOLO comprobar que sea 1 carácter
+    while len(letra) != 1:
+        letra = input("Introduce solo UN carácter: ").lower()
+
+    if letra in letras_intentadas:
+        print("Ya intentaste esa letra.")
+        continue
+
+    letras_intentadas.append(letra)
+
+    if letra in letras_restantes:
+        print(mensajes["acierto"])
+        letras_acertadas.append(letra)
+        letras_restantes.remove(letra)
+
+        progreso = "".join([l if l in letras_acertadas else "*" for l in lista_palabra])
+        print("Palabra:", progreso)
+
+    else:
+        print(mensajes["fallo"])
+        fallos += 1
+
+if len(letras_restantes) == 0:
+    print("\n" + mensajes["ganar"])
+else:
+    print("\n" + mensajes["perder"])
